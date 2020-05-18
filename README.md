@@ -56,6 +56,12 @@ cp .env.example .env
 ./run.sh
 ```
 
+Open your browser
+
+http://localhost:3000/
+
+The project comes with two seed data files. You can click the "Simple test" button to display a very simple table and chart with only a few data points. Or you can click "Daily MSFT" which contains Microsoft stock prices from Yahoo Finance between the April 2018 and Dec 2019. You can also try typing data into the textarea or uploading your own csv file.
+
 ## Running the tests
 
 Several initial tests are provided. There are definitely more tests that can be added.
