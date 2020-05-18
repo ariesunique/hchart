@@ -2,6 +2,11 @@
 
 Simple charting web application. Upload data in csv format. The application will generate a beautiful table and chart.
 
+![alt text](https://github.com/ariesunique/hchart/blob/master/docs/images/msft-724x407.png "H-Chart Application Microsoft Data")
+
+![alt text](https://github.com/ariesunique/hchart/blob/master/docs/images/simple-724x407.png "H-Chart Application Simple Data")
+
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
