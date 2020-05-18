@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <!-- Plotly Javascript -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <title>Holocene Brooks Code Test</title>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="col-md-12 ml-sm-auto col-lg-12 px-md-4">
+            
+            <div class="d-flex justify-content-center flex-wrap flex-md-nowrap align-items-top pt-3 pb-2 mb-3 border-bottom overflow-auto" style="height: 200px;">
+                <div class="w-50">
+                    <b>Instructions:</b> Use this form to display a chart and a graph. 
+                    <br>Upload a csv file OR input your data directly into the textarea. 
+                    <br>(the textarea is only checked if no file is uploaded)
+                    <br>OR click one of the buttons to run a demo using our seed data.
+                    <div >
+                        <a class="btn btn-primary btn-sm mr-3 ml-5" role="button" href="{{ url_for('chart.chart', input='simple') }}">Simple test</a>
+                        <a class="btn btn-primary btn-sm" href="{{ url_for('chart.chart',input='msft') }}">Daily MSFT</a>
+                    </div>                        
+                    <em>Note: Your first column will represent the x-axis. Data will be sorted by the first column before rendering. Also, please limit your file size to 200 KB. Larger files will not be accepted.</em>
+                
+                </div>
+                <div class="w-50">
+                    {% if form %}
+                    <form class="form" id="inputForm" method="POST" action="{{url_for('chart.chart')}}" enctype="multipart/form-data">
+                        <div class="input-group mb-2 mr-sm-2">
+                            {{ form.csrf_token }} 
+                            {{ form.data(rows="4", placeholder="a,b,c\n1,2,3\n2,4,6", class_="form-control") }} 
+                            {{ form.file(placeholder="File", class_="form-control", accept=".csv") }}
+                        </div>
+                        <button class="btn btn-primary" type="submit">Submit</button>
+                    </form>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="row">
+                {% with messages = get_flashed_messages(with_categories=true) %} 
+                    {% if messages %}
+                    <div class="row">
+                        <div class="col-md-12">
+                            {% for category, message in messages %}
+                            <div class="alert alert-{{ category }}">
+                                <a class="close" title="Close" href="#" data-dismiss="alert">&times;</a>
+                                {{ message }}
+                            </div>
+                            <!-- end .alert -->
+                            {% endfor %}
+                        </div>
+                        <!-- end col-md -->
+                    </div>
+                    <!-- end row -->
+                    {% endif %} 
+                {% endwith %} 
+            </div>
+            
+            {% if error %}
+            <div class="jumbotron">
+                <div class="text-center">
+                    <p>An error occurred: {{error_code}} {{error_message}}</p>
+                    <p>
+                        Please re-visit the page. Make sure your uploaded file does not exceed the upload limit.
+                    </p>
+                </div>
+            </div>
+            
+            {% else %}
+            
+            <div class="col-md-12 ml-sm-auto col-lg-12 px-md-4">
+                    {% if filename %}
+                    <div class="row col-12 justify-content-center">
+                        <h3>
+                            Displaying data from {{filename}}
+                        </h3>
+                    </div>
+                    {% endif %}
+                    
+                    <div class="row">
+                        <div class="{{ 'col-md-6 ml-sm-auto' if numcols < 8 else 'col-12' }}">
+                            {% if table %}
+                            {{ table|safe }}
+                            {% endif %}
+                        </div>
+                        <div class="{{ 'col-md-6 ml-sm-auto' if numcols < 8 else 'col-12 pt-5' }}">
+                            {% if chart %}
+                            {{ chart|safe }}
+                            {% endif %}
+                        </div>
+                    </div>
+               
+                </div>
+            
+            {% endif %}            
+        </div>
+    </div>
+      
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  </body>
+</html>
