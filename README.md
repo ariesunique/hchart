@@ -65,7 +65,30 @@ pytest
 
 ## Deployment
 
-This could be deployed on Heroku.
+This app includes a Procfile and gunicorn web server, which will enable you to deploy to Heroku, if you choose.
+
+To deploy to Heroku:
+
+1. Make sure you have an account. If not, sign up for a free on [Heroku](heroku.com)
+2. Install the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli)
+3. Name your application
+
+```
+heroku apps:create your-application-name
+```
+
+4. Set the environment variables
+
+```
+heroku config:set FLASK_APP=run.py
+heroku config:set SECRET_KEY=random-generated-key
+```
+
+5. Deploy to Heroku
+
+```
+git push heroku master
+```
 
 ## Built With
 
