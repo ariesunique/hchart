@@ -15,19 +15,21 @@ Make sure you have python (and pip) installed on your system.
 1. Clone this repository
 
 ```
-git checkout https://github.com/ariesunique/happy_points.git
+git clone https://github.com/ariesunique/hchart.git
 ```
 
 2. Create a virtual environment.
 
 ```
-python -m venv hchart
-source hchart/bin/activate
+python -m venv hchart-env
+source hchart-env/bin/activate
+pip install --upgrade pip
 ```
 
 3. Install the dependencies.
 
 ```
+cd hchart
 pip install -r requirements.txt
 ```
 
@@ -43,14 +45,20 @@ will copy any config vars found into environment variables.
 cp .env.example .env
 ```
 
+5. **Run the application**
+
+```
+./run.sh
+```
 
 ## Running the tests
 
 Several initial tests are provided. There are definitely more tests that can be added.
 
-The tests can be run from the **tests** directory by running
+The tests can be run from the tests directory.
 
 ```
+cd tests
 pytest
 ```
 
